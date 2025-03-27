@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "prisma migrate deploy && node --watch index.js",
-    "start": "prisma migrate deploy && node index.js",
+    "start": "prisma db push && node index.js",
     "migrate": "prisma migrate dev --name init",
     "generate": "prisma generate",
     "studio": "prisma studio"
