@@ -1,0 +1,32 @@
+.alert-popup {
+    position: absolute;
+    text-transform: capitalize;
+    display: inline-block;
+    background-color: whitesmoke;
+    color: #2f91ec;
+    right: 1em;
+    padding: 0.2em 0.6em;
+    border-radius: 0.3em;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    opacity: 0;
+    display: none;
+    transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.alert-popup.show::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #2f91ec;
+    border-radius: 0.3em;
+}
+  
+.alert-popup.show {
+    transform: translateX(0);
+    display: block;
+    opacity: 1;
+}

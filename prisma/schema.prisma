@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DriveSession {
+  id        String   @id
+  sid       String   @unique
+  data      String   @db.Text
+  expiresAt DateTime
+}
+
+model DriveExpiry {
+  id         Int      @id @default(autoincrement())
+  downloadId String   @unique
+  privateUrl String
+  expiresAt  Int
+}
+
+model DriveUser {
+  id       Int         @id @default(autoincrement())
+  name     String?
+  email    String      @unique
+  password String
+  role     Role        @default(USER)
+  files    DriveItem[]
+}
+
+model DriveItem {
+  id        Int         @id @default(autoincrement())
+  name      String
+  type      ItemType
+  url       String?     @unique
+  mimeType  String?
+  fileSize  Float?      @default(0)
+  createdAt DateTime    @default(now())
+  // Owner-relationship
+  owner     DriveUser   @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+  // Self-relation for hierarchy
+  parent    DriveItem?  @relation("ItemToItem", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId  Int?
+  children  DriveItem[] @relation("ItemToItem")
+
+  @@unique([name, parentId, ownerId])
+  @@index([parentId])
+}
+
+enum Role {
+  USER
+  GUEST
+  ADMIN
+}
+
+enum ItemType {
+  FOLDER
+  FILE
+}

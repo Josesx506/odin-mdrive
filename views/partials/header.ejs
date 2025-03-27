@@ -1,0 +1,25 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/header.css">
+    <script defer>
+        function toggleMenu() {
+          const navLinks = document.getElementById("navLinks");
+          navLinks.classList.toggle("active");
+          const hamburger = document.querySelector(".hamburger");
+          hamburger.classList.toggle("active");
+        }
+
+        function toggleSideBar() {
+          const sideToggle = document.getElementById("sideToggle");
+          const storage = document.querySelector(".storage");
+          const dirTree = document.querySelector(".dirTree");
+          const sideItems = document.querySelectorAll(".sideItems");
+          sideToggle.classList.toggle("collapsed");
+          storage.classList.toggle("collapsed");
+          dirTree.classList.toggle("collapsed");
+          sideItems.forEach((item)=>item.classList.toggle("collapsed"));
+        }
+    </script>
+</head>

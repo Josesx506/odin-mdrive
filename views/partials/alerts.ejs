@@ -1,0 +1,10 @@
+<% if (typeof alert !== 'undefined' && alert.length > 0) { %>
+  <link rel="stylesheet" href="/css/alerts.css">
+    <div id="alertPopup" class="alert-popup">
+      <% alert.forEach(message => { %>
+        <p><%= message %></p>
+      <% }); %>
+    </div>
+<% } %>
+  
+<script src="/scripts/alert.js"></script>

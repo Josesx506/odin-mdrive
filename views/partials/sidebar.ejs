@@ -1,0 +1,52 @@
+<aside class="sidebar">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/fileTree.css">
+    <div class="sbrToggler">
+        <span id="sideToggle" class="chevToggle material-symbols-rounded" onclick="toggleSideBar()">chevron_left</span>
+    </div>
+
+    <ul class="sideNav primary">
+        <li class="sideItems">
+            <a href="#" id="createFolder">
+                <span class="sideIcon material-symbols-rounded">create_new_folder</span>
+                <span class="sideLabel">Create Folder</span>
+            </a>
+        </li>
+        <li class="sideItems">
+            <a href="#" id="uploadFile">
+                <span class="sideIcon material-symbols-rounded">upload_file</span>
+                <span class="sideLabel">Upload File</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="dirTree">
+        <div class="treeHeader">Directory</div>
+        <%- include('fileTree', { folObj: dirObjs, currId: currId }) %>
+    </div>
+
+    <div class="storage">
+        <% const pct = Math.min(100, Math.round((usedStg / maxStg) * 100)); %>
+        <div class="progressContainer">
+            <div class="progressBar <%= prgFmtr(pct) %>" style="<%= 'width:' + pct + '%;' %>"></div>
+        </div>
+        <div class="storage-info">
+            <%= usedStg %> of <%= maxStg %> MB
+        </div>
+    </div>
+
+    <ul class="sideNav secondary">
+        <li class="sideItems">
+            <a href="#">
+                <span class="sideIcon material-symbols-rounded">account_circle</span>
+                <span class="sideLabel">Profile</span>
+            </a>
+        </li>
+        <li class="sideItems">
+            <a href="/auth/signout">
+                <span class="sideIcon material-symbols-rounded">logout</span>
+                <span class="sideLabel">Logout</span>
+            </a>
+        </li>
+    </ul>
+</aside>

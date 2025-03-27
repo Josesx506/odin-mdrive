@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/header') %>
+<link rel="stylesheet" href="/css/auth.css">
+<body>
+    <%- include('../partials/nav') %>
+    <div class="container formHolder">
+        <div class="formTitle">
+            <h3>Sign In</h3>
+            <div>Sign in to continue</div>
+        </div>
+        <%- include("../partials/errors.ejs") %>
+        <form class="authForm" action="<%= `${locals.baseUrl}/signin` %>" method="POST">
+            <div class="signInInput">
+                <input id="email" name="email" placeholder="Enter Email" type="email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="signInInput">
+                <input id="password" name="password" placeholder="Enter Password" type="password" required>
+                <label for="password">Password</label>
+            </div>
+            <div class="forgotPassword">
+                <a href="#">Forgot password ?</a>
+            </div>
+            <div class="submitBtn">
+                <button>Submit</button>
+            </div>
+            <div class="bottomLink">
+                Don't have an account ? <a href="/auth/register">Signup</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

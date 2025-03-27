@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/drive.css">
+<script src="/scripts/modals.js"></script>
+<body>
+    <%- include('partials/nav') %>
+    <%- include('partials/alerts.ejs') %>
+    <div class="container asidePage">
+        <%- include('partials/sidebar', { dirObjs:folders, currId:itemId, usedStg:userStorage, maxStg:maxStorage, prgFmtr:prgFmtr }) %>
+        <div class="asideMain">
+            <div class="container">
+                <div class="mainView">
+                    <div class="fPathList">
+                        <b>./</b>
+                        <% filePath.forEach((path, index) => {  %>
+                            <span class="fPathItem">
+                                <a href="<%= `${locals.baseUrl}/view/${path.id}` %>">
+                                   <%= path.name %>
+                                </a>
+                            </span> 
+                            <%= index !== filePath.length - 1 ? '>' : '' %>
+                        <% }) %>
+                    </div>
+                    <div class="fContent">
+                        <div class="fContentHeader">
+                            <div>Name</div>
+                            <div>Type</div>
+                            <div>Size</div>
+                            <div>Created</div>
+                        </div>
+                        <div class="fContentRows">
+                            <% if (folderContent.length===0) { %>
+                                <div class="emptyContent">
+                                    No files or folders to display
+                                </div>
+                            <% } else { %>
+                                <% folderContent.forEach((item) => {  %>
+                                    <div class="fContentRowItem">
+                                        <div class="contentName">
+                                            <a class="contentNameLink" href="<%= item.type==='FILE' ? item.url : `${locals.baseUrl}/view/${item.id}` %>" 
+                                                target="<%= item.type==='FILE' ? '_blank' : '_self' %>">
+                                                <span class="crIcon material-symbols-rounded">
+                                                    <%= item.type==='FOLDER' ? 'create_new_folder' : 'image' %>
+                                                </span>
+                                                <span class="crName">
+                                                    <%= item.name %>
+                                                </span>
+                                            </a>
+                                            <div class="contentNameActions">
+                                                <% if (item.type==='FILE') { %>
+                                                    <a href="#"  class="shareItem" data-itid="<%= item.id %>">
+                                                        <span class="material-symbols-rounded">share</span>
+                                                    </a>
+                                                <% } %>
+                                                <a href="#" class="deleteItem" data-delIcon=""
+                                                    data-href="<%= `${locals.baseUrl}/delete/${item.id}` %>">
+                                                    <span class="material-symbols-rounded">delete_forever</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="contentType">
+                                            <%= item.mimeType ? item.mimeType : '--' %>
+                                        </div>
+                                        <div class="contentSize">
+                                            <%= item.type==='FOLDER' ? '--' : item.fileSize %>
+                                        </div>
+                                        <div class="contentDate">
+                                            <%= dateFmtr(item.createdAt) %>
+                                        </div>
+                                    </div>
+                            <% })} %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal" id="folderModal">
+                <div class="modalContent">
+                    <div class="modalHeader">
+                        <h3>Create New Folder</h3>
+                        <button id="closeFolderModal">&times;</button>
+                    </div>
+                    <form action="/drive/create<%= itemId ? '?itemId=' + itemId : '' %>" method="POST" class="modalForm">
+                        <div class="modalEntry">
+                            <label for="createFolder"></label>
+                            <input id="createFolder" name="createFolder" maxlength="10" placeholder="Enter Name (10 chars)" type="text" required>
+                        </div>
+                        <div class="modalSubmit">
+                            <button type="submit">Create Folder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal" id="fileModal">
+                <div class="modalContent">
+                    <div class="modalHeader">
+                        <h3>Upload File</h3>
+                        <button id="closeFileModal">&times;</button>
+                    </div>
+                    <form action="/drive/upload<%= itemId ? '?itemId=' + itemId : '' %>" method="POST" class="modalForm" enctype="multipart/form-data">
+                        <div class="modalEntry">
+                            <label for="upldFile"></label>
+                            <input id="upldFile" name="upldFile" type="file">
+                        </div>
+                        <div class="modalSubmit">
+                            <button type="submit">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal" id="deleteModal">
+                <div class="modalContent">
+                    <div class="modalHeader">
+                        <h3>Delete File</h3>
+                        <button id="closeDeleteModal">&times;</button>
+                    </div>
+                    <form action="" method="POST" class="modalForm">
+                        <div class="modalEntry">
+                            <div class="modalMessage">
+                                Are you sure you want to delete this item and 
+                                all its related content?
+                            </div>
+                        </div>
+                        <div class="modalSubmit">
+                            <button class="cancelDelete">Cancel</button>
+                            <button data-delItem="" type="submit">Delete Item</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal" id="shareModal">
+                <div class="modalContent">
+                    <div class="modalHeader">
+                        <h3>Share File</h3>
+                        <button id="closeShareModal">&times;</button>
+                    </div>
+                    <form action="" method="POST" class="modalForm">
+                        <div class="modalEntry">
+                            <div class="modalMessage">
+                                Generate a public link to share the file?
+                            </div>
+                        </div>
+                        <div class="modalEntry">
+                            <div class="radioContainer">
+                                <div class="radioOption">
+                                  <input type="radio" id="dur1hr" name="shareDuration" value="1" checked>
+                                  <label for="dur1hr">1 hour</label>
+                                </div>
+                                
+                                <div class="radioOption">
+                                  <input type="radio" id="dur6hr" name="shareDuration" value="6">
+                                  <label for="dur6hr">6 hours</label>
+                                </div>
+                                
+                                <div class="radioOption">
+                                  <input type="radio" id="dur24hr" name="shareDuration" value="24">
+                                  <label for="dur24hr">1 day</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modalEntry">
+                            <input class="modalMessage shareableLink">
+                        </div>
+                        <div class="modalSubmit">
+                            <button class="cancelShare">Cancel</button>
+                            <button data-shareItem="" type="submit">Generate</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>

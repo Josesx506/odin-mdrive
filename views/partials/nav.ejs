@@ -1,0 +1,40 @@
+<nav class="navBar">
+    <link rel="stylesheet" href="/css/nav.css">
+    <div class="logo">
+        <a href="/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-video">
+                <path
+                    d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"
+                    fill="lightgray" />
+                <g transform="scale(0.7) translate(5, 6)">
+                    <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"
+                        fill="rgb(242,190,66)" />
+                    <rect x="2" y="6" width="14" height="12" rx="2" fill="rgb(81,134,237)" />
+                    <g transform="scale(0.8) translate(2, 3)">
+                        <path d="m7 8 6 4-6 4Z" fill="white" />
+                    </g>
+                </g>
+            </svg>
+            <span>MediaDrive</span>
+        </a>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="https://josesx506.github.io/Odin_Project_FS/">Odin</a></li>
+        <% if (!locals.user) {%>
+            <li><a href="<%= `/auth/signin` %>">Sign In</a></li>
+            <li><a href="<%= `/auth/register` %>">Sign Up</a></li>
+            <% } else { %>
+                <li><a href="<%= `/drive/view` %>">Drive</a></li>
+                <li><a href="<%= `/auth/signout` %>">Sign Out</a></li>
+            <% } %>
+    </ul>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/header', { title: title }) %>
+<link rel="stylesheet" href="/css/404.css">
+<body>
+    <%- include('partials/nav') %>
+    <div class="container" style="text-align: center;">
+        <h2>Error Page</h2>
+        <div><%= `Error ${id}` %></div>
+        <div><%= `Details: ${error}` %></div>
+    </div>
+</body>
+</html>

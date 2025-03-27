@@ -1,0 +1,126 @@
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5186ed;
+    color: white;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    margin-bottom: 0.5em;
+    z-index: 2;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+    & a {
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.2em;
+        & span {
+            color: rgb(255, 220, 125);
+        }
+    }
+}
+
+.logo a:hover {
+    opacity: 0.75;
+}
+
+/* Mobile Navigation Links - Hidden by Default */
+.nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #5186ed;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1;
+    list-style: none;
+    font-family: Monteserrat;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0.75em 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: black;
+}
+
+/* Mobile Hamburger Menu - Visible by Default */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.hamburger span {
+    width: 22px;
+    height: 3px;
+    background-color: white;
+    margin: 2px 0;
+    border-radius: 2px;
+    justify-self: start;
+}
+
+.hamburger.active > span:nth-child(1) {
+    transform: translate(1px, 8px) rotate(45deg);
+}
+
+.hamburger.active > span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active > span:nth-child(3) {
+    transform: translate(1px, -6.5px) rotate(-45deg);
+}
+
+
+/* Desktop Styles */
+@media (min-width: 620px) {
+    .navBar {
+      padding: 0.5rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+    }
+
+    /* Hide Hamburger on Desktop */
+    .hamburger {
+      display: none;
+    }
+
+    /* Show Nav Links Horizontally on Desktop */
+    .nav-links {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    .nav-links li {
+      font-size: 1.2rem;
+      margin: 0 2rem 0 0;
+    }
+}

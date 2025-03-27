@@ -1,0 +1,19 @@
+.errorList {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0;
+}
+
+.errorLine {
+    display: grid;
+    grid-template-columns: 1rem 1fr;
+    align-items: flex-start;
+    text-wrap: balance;
+    line-height: 1.2;
+    gap: 0.5em;
+    & svg {
+        color: red;
+        width: 1em;
+        height: 1em;
+    }
+}

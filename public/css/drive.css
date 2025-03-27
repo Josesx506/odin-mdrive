@@ -1,0 +1,304 @@
+.asidePage {
+    display: flex;
+    gap: 1em;
+    height: 80vh;
+}
+
+.asideMain {
+    border: 1px solid darkgray;
+    border-radius: 0.3em;
+    width: 100%;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modalContent {
+    position: relative;
+    padding: 0.75em 1em;
+    border-radius: 0.75em;
+    width: fit-content;
+    margin: 35vh auto;
+    background-color: whitesmoke;
+    box-shadow: 0 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4em;
+    gap: 2em;
+    & h3 {
+        font-family: Poppins;
+        font-weight: 600;
+    }
+}
+
+#closeFolderModal, 
+#closeFileModal, 
+#closeDeleteModal,
+#closeShareModal {
+    color: white;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    display: block;
+    aspect-ratio: 1;
+    background-color: rgb(238,107,96);
+    border: 0.5px solid darkgray;
+    transition: scale 0.2s ease;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        color: black;
+    }
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.modalEntry input {
+    width: 100%;
+    font-family: Montserrat;
+    padding: 0.25em 0.5em;
+    border-radius: 0.3em;
+    border: 1px solid darkgray;
+}
+
+#upldFile, 
+.modalEntry > .modalMessage {
+    max-width: 230px;
+}
+
+.shareableLink {
+    display: none;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    height: 2rem;
+    border-radius: 0.3em;
+    padding: 0.25em 0.3em;
+    background-color: rgba(0,0,0,0.2);
+    &::-webkit-scrollbar {
+        height: 2px;
+        width: 5px;
+    }
+}
+
+.radioContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.radioOption input[type="radio"] {
+    display: none;
+}
+
+.radioOption label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25em 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.25em;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.radioOption input[type="radio"]:checked + label {
+    background-color: #4a90e2;
+    color: white;
+    border-color: #3a80d2;
+}
+  
+.radioOption label:hover {
+    background-color: #e9e9e9;
+}
+  
+.radioOption input[type="radio"]:checked + label:hover {
+    background-color: #3a80d2;
+}
+
+.modalSubmit {
+    margin-left: auto;
+    font-family: Montserrat;
+    transition: color 0.2s ease;
+    & > button {
+        padding: 0.25em 0.5em;
+        border-radius: 0.3em;
+        border: 1px solid darkgray;
+    }
+    & > button:hover {
+        cursor: pointer;
+        color: #5186ed;
+    }
+}
+
+.modalSubmit button[data-delItem]:hover {
+    color: rgb(238,107,96);
+}
+
+.modalSubmit button[data-shareItem]:hover {
+    color: rgb(27, 84, 57);
+}
+
+#folderModal.active, 
+#fileModal.active, 
+#deleteModal.active,
+#shareModal.active {
+    display: block;
+}
+
+.mainView {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.fPathList {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow-x: hidden;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-family: Montesserat;
+    text-transform: lowercase;
+    gap: 0.2em;
+    margin-top: 1em;
+    & > span {
+        color: #696969;
+    }
+    & > span:not(:last-child) {
+        color: #5186ed;
+    }
+}
+
+.fPathItem > a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.fContent {
+    width: 100%;
+}
+
+.fContentHeader, 
+.fContentRowItem {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    padding: 0.25em 0.5em;
+    font-size: 0.8rem;
+    align-items: center;
+    gap: 0.1em;
+}
+
+.fContentHeader {
+    border-bottom: 1px solid black;
+    font-family: Poppins;
+    font-weight: 600;
+}
+
+.fContentHeader > div,
+.fContentRowItem > div {
+    overflow: hidden; /* Prevent content overflow */
+    text-overflow: ellipsis;
+}
+
+.fContentHeader > div:not(:first-child),
+.fContentRowItem > div:not(:first-child) {
+    text-align: center;
+}
+
+.fContentRows {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    margin-top: 0.3em;
+    gap: 0.3em;
+    font-family: Montserrat;
+}
+
+.emptyContent {
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 150px;
+}
+
+.fContentRowItem {
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    border-radius: 0.3em;
+}
+
+.contentName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contentNameLink {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.1em;
+    overflow: hidden;
+}
+
+.contentNameLink > .crIcon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.contentNameLink > .crName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.contentNameLink:hover {
+    cursor: pointer;
+    color: #5186ed;
+}
+
+.contentNameActions {
+    display: flex;
+    align-items: center;
+    gap: 0.1em;
+    & a > span {
+        font-size: 1rem;
+    }
+    & a:hover {
+        cursor: pointer;
+        color: #5186ed;
+    }
+}
+
+a[data-delIcon]:hover {
+    color: rgb(238,107,96);
+}
+
+.contentDate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

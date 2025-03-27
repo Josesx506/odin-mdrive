@@ -1,0 +1,109 @@
+
+.formHolder {
+    display: flex;
+    flex-direction: column;
+    width: min(90%, 400px);
+    margin: 2em auto;
+    background-color: white;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.formTitle {
+    text-align: center;
+    margin: 1.2em 1em 0 0;
+    & h3 {
+        color: #5186ed;
+    }
+    & div {
+        padding-top: 0.5em;
+        font-size: 0.9rem;
+    }
+}
+
+.authForm {
+    margin-top: 2em;
+    font-size: 1rem;
+}
+
+
+.signUpInput, .signInInput {
+    margin-bottom: 1.5em;
+    position: relative;
+    border: 1px solid darkgray;
+    border-radius: 0.25em;
+}
+
+.signUpInput input, .signInInput input {
+    border: 0;
+    background-color: transparent;
+    font-family: Montserrat;
+    width: 100%;
+    font-size: inherit;
+    padding: 0.75em 0.5em;
+}
+
+.signUpInput label, .signInInput label {
+    position: absolute;
+    left: 0.5em;
+    top: -0.75em;
+    background-color: #fff;
+    font-weight: bold;
+    padding: 0px 0.25em;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.signUpInput input:focus + label,
+.signUpInput input:valid:not(:placeholder-shown) + label,
+.signInInput input:focus + label,
+.signInInput input:valid:not(:placeholder-shown) + label {
+    color: #5186ed;
+    transition: all 0.2s ease-in;
+    /* cubic-bezier(0.60 , 4.00 , 0.255 , 1.55) */
+}
+
+.forgotPassword {
+    margin-bottom: 1.5em;
+    font-weight: bold;
+    text-align: end;
+    & a {
+        color: #5186ed;
+    }
+    & a:hover{
+        text-decoration: underline;
+    }
+}
+
+.submitBtn {
+    width: fit-content;
+    margin: 0 auto;
+    & button {
+        padding: 0.3em 0.6em;
+        border-radius: 0.4em;
+        color: #fff;
+        font-weight: 580;
+        letter-spacing: 1.4px;
+        border: 1px solid darkgray;
+        font-size: inherit;
+        background: linear-gradient(45deg , #64aef4 , #5186ed);
+    }
+    & button:hover {
+        cursor: pointer;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
+}
+
+.bottomLink {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    text-align: center;
+    & a{
+        font-size: 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        color: #5186ed;
+    }
+}

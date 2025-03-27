@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0");
+
+.sidebar {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    border: 1px solid darkgray;
+    border-radius: 0.3em;
+    padding: 0.1em 0.6em;
+    gap: 0.5em;
+}
+
+.sbrToggler {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.chevToggle {
+    position: absolute;
+    right: 0;
+    transform: translate(1em, 0.5em);
+    border-radius: 50%;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.chevToggle:hover {
+    cursor: pointer;
+    color: #5186ed;
+}
+
+.chevToggle.collapsed {
+    position: relative;
+    transform: rotate(180deg);
+}
+
+.sideNav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.sideItems {
+    width: 100%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 0.1em 0.25em;
+    border-radius: 0.3em;
+}
+
+.sideItems > a, .dirItem > a {
+    display: flex;
+    align-items: center;
+    gap: 0.15em;
+    &:hover {
+        color: #5186ed;
+    }
+}
+
+.sideItems > a > .sideLabel {
+    white-space: nowrap;
+}
+
+.storage.collapsed,
+.sideItems.collapsed > a > .sideLabel, 
+.dirTree.collapsed {
+    width: 0;
+    visibility: hidden;
+}
+
+.sideItems.collapsed > a > .sideLabel {
+    display: none;
+}
+
+.storage {
+    margin-top: auto;
+    pointer-events: none;
+}
+
+.progressContainer {
+    width: 100%;
+    background-color: #dddddd;
+    border-radius: 0.3em;
+}
+  
+.progressBar {
+    height: 0.5rem;
+    line-height: 0.5rem;
+    border-radius: 0.3em;
+}
+  
+.progress-green {
+    background-color: #4CAF50;
+}
+  
+.progress-yellow {
+    background-color: #FFC107;
+}
+  
+.progress-red {
+    background-color: #F44336;
+}
+  
+.storage-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: Montesserat;
+    font-size: 0.7rem;
+    color: #333;
+    margin-top: 0.3em;
+}
+
+.sideNav.secondary {
+    margin-bottom: 0.5em;
+}
+
+@media(max-width: 620px) {
+    .sbrToggler {
+        display: none;
+    }
+
+    .storage, .dirTree,
+    .sideItems > a > .sideLabel {
+        width: 0;
+        visibility: hidden;
+    }
+
+    .sideItems > a > .sideLabel {
+        display: none;
+    }
+
+    .sideNav.secondary {
+        margin-top: auto;
+    }
+}
