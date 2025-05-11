@@ -183,6 +183,9 @@ async function deletebyId(req, res, next) {
           }
           // Remove db entry
           const remove = await tx.driveItem.delete({ where: { id: itemRow.id }})
+        } else {
+          // Remove empty folders
+          const remove = await prisma.driveItem.delete({ where: { id: itemRow.id }})
         }
       });
     } 
