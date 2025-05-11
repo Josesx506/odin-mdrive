@@ -77,8 +77,11 @@
 }
 
 .submitBtn {
+    display: flex;
+    flex-direction: column;
     width: fit-content;
     margin: 0 auto;
+    gap: 0.5em;
     & button {
         padding: 0.3em 0.6em;
         border-radius: 0.4em;
@@ -91,8 +94,7 @@
     }
     & button:hover {
         cursor: pointer;
-        letter-spacing: 1px;
-        font-weight: 700;
+        text-shadow: 0 0 1.0px currentColor;
     }
 }
 

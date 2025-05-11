@@ -4,3 +4,4 @@ npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma 
 apt update && apt install -y postgresql-client
 psql $DATABASE_URL -f prisma/migrations/0_init/migration.sql
 npx prisma migrate resolve --applied 0_init
+node prisma/seed.js

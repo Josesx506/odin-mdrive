@@ -24,6 +24,7 @@
             </div>
             <div class="submitBtn">
                 <button>Submit</button>
+                <button id="guestLogin">Guest Access</button>
             </div>
             <div class="bottomLink">
                 Don't have an account ? <a href="/auth/register">Signup</a>
@@ -31,4 +32,16 @@
         </form>
     </div>
 </body>
+<script>
+  document.getElementById("guestLogin").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    // Set guest credentials
+    document.getElementById("email").value = "go@odin.com";
+    document.getElementById("password").value = "<%= process.env.GUEST_PSWD %>";
+
+    // Submit the form programmatically
+    this.closest(".authForm").submit();
+  });
+</script>
 </html>
